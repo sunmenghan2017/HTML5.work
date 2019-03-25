@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>历史记录</title>
+        
+        <style>
+            #memo {
+                width:200px;
+                overflow: hidden;
+                text-align: left;
+                height: 38px;
+                border: 2px solid orange;
+                border-radius: 10px;
+            }
+            #search {
+                width: 141px;
+                height: 37px;
+                font-size: 14px;
+                line-height: 14px;
+                color: #959595;
+                padding-bottom: 2px;
+            } 
+            #msg div div{
+                height: 28px;
+                margin-right:8px;
+                margin-top: 10px;
+                float: left;
+                background-color: #959595;
+            }
+            #his-dele {
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                display: inline-block;
+                background: #E0E0E0;
+                color: #fff;
+                text-align: center;
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!--搜索框-->
+        <input type="search" id="memo" autofocus="autofocus" placeholder="请输入想查找的商品"	list="names" />
+            <datalist id="names">
+                <option>电脑</option>
+                <option>华为手机</option>
+                <option>面包</option>
+                <option>《HTML+CSS3从入门到精通》</option>
+            </datalist>
+        <button id="search" onclick="saveStorage('memo');">搜索</button>
+        <!--历史记录-->
+        <div id="delete" style="width:385px;">
+            <div class="current">最近搜索</div>
+            <div>
+                <div id="msg" style="float: left;"></div>
+                <!--删除按钮-->
+                <div id="his-dele" type="button" style="float:right;" onclick="clearStorage('msg');" >X</div>
+            </div>
+        </div>
+    </body>
+    <script>
+            /*搜索记录相关*/
+
+        function saveStorage(id) {
+            var data = document.getElementById(id).value;
+            var time = new Date().getTime();
+            localStorage.setItem(time,data);
+            console.log("数据已保存。");
+            loadStorage('msg');
+        }
+        //添加
+        function loadStorage(id) {
+            var result = '<div>';
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var date = new Date();
+                date.setTime(key); 
+                var datestr = date.toGMTString();
+                result += "<div>" + value +"</div>"+"<div></div>";
+            }
+            result += '</div>';
+            var target = document.getElementById(id);
+            target.innerHTML = result;
+        }
+        //删除
+        function clearStorage() {
+            localStorage.clear();
+            alert("全部数据被清除。");
+            loadStorage('msg');
+        }
+       
+    </script>
+
+</html>
