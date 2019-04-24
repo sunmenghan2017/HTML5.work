@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GUAJIANG</title>
+</head>
+<body>
+    <div style="width:224px;height:100px;margin:0 auto;border:1px solid maroon;">
+        <canvas id="canvas" width="224" height="100"></canvas>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var cv = document.getElementById("canvas");
+        var ctx=cv.getContext("2d");
+        var isDown=false;
+        function toAngle(radian){
+            return radian/Math.PI*180;
+        }
+        function toRadian(angle){
+            return angle/180*Math.PI;
+        }
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.font="30px consolas";
+        ctx.fillStyle='red';
+        ctx.fillText('一等奖',cv.width/2,cv.height/2);
+        var dataURL=cv.toDataURL("image/jpg",1);
+        cv.style.background="url("+dataURL+")";
+
+        //覆盖层  在图层上点击或涂抹（点击然后拖动鼠标）时，把点击区域变为透明
+        ctx.beginPath();
+        ctx.fillStyle="#eee";
+        ctx.fillRect(0,0,cv.width,cv.height);
+        cv.addEventListener("mousedown",function(){
+            isDown=true;
+        })
+        cv.addEventListener("mouseup",function(){
+            isDown=false;
+            ctx.globalCompositeOperation="source-out"
+        })
+        cv.addEventListener("mousemove",function(e){
+            if (isDown){
+                ctx.globalCompositeOperation="destination-out";
+                ctx.beginPath();
+                var posObj=cv.getBoundingClientRect();
+                var left=posObj.left;
+                var top=posObj.top;
+                var x= e.clientX-left;
+                var y= e.clientY-top;
+                ctx.arc(x,y,20,0,Math.PI*2);
+                ctx.fill();
+            }
+        })
+
+        //能够获得涂抹区域百分比，当用户涂抹了85%后，去掉涂层完成刮奖
+        document.addEventListener("mousemove", function () {
+            /* 获取imageData对象*/
+            var imageDate = ctx.getImageData(0, 0, cv.width, cv.height);
+            var allPX = imageDate.width * imageDate.height;
+            var iNum = 0;//记录刮开的像素点个数
+            for (var i = 0; i < allPX; i++) {
+                if (imageDate.data[i * 4 + 3] == 0) {
+                    iNum++;
+                }
+            }
+            if (iNum >= allPX * 0.85) {
+                ctx.clearRect(0,0,cv.width,cv.height);
+            }
+        }, false)
+        
+    }
+</script>
+</html>
