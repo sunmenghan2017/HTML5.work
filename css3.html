@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #box{
+            width: 100%;
+            margin: 0 auto;
+            background: rgb(226, 223, 223);
+        }
+        #div0{
+            width: 500px;
+            margin: 0 auto;
+            background: #fff;
+        }
+        #div1{
+            width: 500px;
+            height:328px;
+            background: url(img/zhanqiao.jpg) no-repeat center;
+            /*background-size: contain;*/
+            /*display: flex;*/
+            overflow: hidden;
+            /*box-shadow:0;*/
+            transition: height 2s linear,transform 2s linear,box-shadow 2s linear;
+        }
+        #div1:hover{
+            height: 208px;
+            transform: scale(1,1.2);
+            /*box-shadow: #eee;*/
+        }
+        #div2{
+            width: 287px;
+            height:140px;
+            margin: 0 auto;
+            margin-top: 10px;
+            overflow: hidden;
+            transition: height 2s linear,transform 2s linear;
+        }
+        #div2:hover{
+            height: 290px;
+            transform: translateY(-150px);
+        }
+        #date{
+            width: 50px;
+            height: 50px;
+            background:orange;
+            text-align: center; 
+            position: relative;
+            left:430px;
+            border-radius:25px;
+        }
+        #im{
+            width:70px; 
+            height:30px;
+            background:orange; 
+            line-height: 30px;
+            text-align: center;
+            position: relative;
+            top:218px;
+        }
+        
+        #p2{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="div0">
+            <div id="div1">
+                <p id="date"></p>
+                <p id="im">照片</p>
+            </div>
+            <div id="div2">
+                <h1>青岛栈桥</h1>
+                <h2 style="color:orange;" >国家AAAA级旅游景区</h2>
+                <p id="p1">青岛栈桥是青岛滨海风景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。青岛栈桥位于游人如织的青岛中山路南端，桥身从海岸探入如弯月般的青岛湾深处。桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。</p>
+                
+            </div>
+            <p id="p2">10分钟前&&123评论</p>
+        </div>
+    </div>
+</body>
+<script>
+    var date=document.getElementById('date');
+    var date1= new Date().getDate();
+    date.innerHTML=date1;
+    var m=document.createElement('p');
+    date.appendChild(m)
+    var m1= new Date().getMonth()+1;
+    m.innerHTML=m1+'月';
+    m.setAttribute("style","margin-top:0");
+
+    var div1=document.getElementById('div1');
+    var div2=document.getElementById('div2');
+    div1.onmouseover=function(){
+        div1.style.height='220'+'px';
+        div2.style.height='290'+'px';
+    }
+    div1.onmouseout=function(){
+        div1.style.height='328'+'px';
+        div2.style.height='140'+'px';
+    }
+</script>
+</html>
