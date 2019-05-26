@@ -16,12 +16,7 @@
         var cv = document.getElementById("canvas");
         var ctx=cv.getContext("2d");
         var isDown=false;
-        function toAngle(radian){
-            return radian/Math.PI*180;
-        }
-        function toRadian(angle){
-            return angle/180*Math.PI;
-        }
+        
         ctx.textAlign="center";
         ctx.textBaseline="middle";
         ctx.font="30px consolas";
@@ -39,7 +34,7 @@
         })
         cv.addEventListener("mouseup",function(){
             isDown=false;
-            ctx.globalCompositeOperation="source-out"
+            ctx.globalCompositeOperation="source-out";
         })
         cv.addEventListener("mousemove",function(e){
             if (isDown){
