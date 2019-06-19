@@ -13,57 +13,98 @@
         }
         #div0{
             width: 500px;
+            height: 540px;
+            background: white;
             margin: 0 auto;
-            background: #fff;
+            border:1px solid gray;
+            box-shadow: 5px 5px 5px 5px gray;
+            position:relative;
+            overflow: hidden;
+            transition:height 0.5s ease-in-out;
         }
         #div1{
             width: 500px;
             height:328px;
-            background: url(img/zhanqiao.jpg) no-repeat center;
-            /*background-size: contain;*/
-            /*display: flex;*/
+            background-size: contain;
+            display: flex;
             overflow: hidden;
-            /*box-shadow:0;*/
-            transition: height 2s linear,transform 2s linear,box-shadow 2s linear;
         }
-        #div1:hover{
-            height: 208px;
-            transform: scale(1,1.2);
-            /*box-shadow: #eee;*/
+        img{
+            width: 500px;
+            transform:scale(1,1);
+            transition:transform 0.5s ease-in-out;
+        }
+        
+        #div0:hover img{
+            transform:scale(1.3,1.2);
+        }
+        #gray{
+            display: none;
+            background-color: grey;
+            width: 500px;
+            height: 350px;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         #div2{
-            width: 287px;
-            height:140px;
+            width: 500px;
+            height:160px;
             margin: 0 auto;
-            margin-top: 10px;
-            overflow: hidden;
-            transition: height 2s linear,transform 2s linear;
+            position:relative;
+            left: 0;
+            top:0;
+            transition: background-color 0.5s ease-in-out,transform 0.5s ease-in-out;
         }
-        #div2:hover{
-            height: 290px;
-            transform: translateY(-150px);
+        #div0:hover #div2{
+            background-color: #fff;
+            transform: translateY(-85px);
         }
         #date{
             width: 50px;
             height: 50px;
             background:orange;
             text-align: center; 
-            position: relative;
-            left:430px;
+            position: absolute;
+            left: 395px;
+            top:28px;
             border-radius:25px;
         }
         #im{
             width:70px; 
             height:30px;
             background:orange; 
+            color: white;
             line-height: 30px;
             text-align: center;
-            position: relative;
-            top:218px;
+            position: absolute;
+            top: -46px;
         }
-        
+        #dp0{
+            width: 300px;
+            position: absolute;
+            left: 100px;
+            top:0;
+            margin: 0 auto;
+        }
+        #p1{
+            font-size: 12px;
+            padding-top: 15px;
+            padding-left: 10px;
+            color: grey;
+            line-height: 25px;
+            display:none;
+        }
         #p2{
-            margin-left: 100px;
+            color: gray;
+            margin-left: 105px;
+        }
+        #div0:hover #p1{
+            display: inline;
+        }
+        #div0:hover #gray{
+            display: inline;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -71,16 +112,20 @@
     <div id="box">
         <div id="div0">
             <div id="div1">
+                <img src="img/zhanqiao.jpg" >
                 <p id="date"></p>
-                <p id="im">照片</p>
+                <div id="gray"></div>
             </div>
             <div id="div2">
-                <h1>青岛栈桥</h1>
-                <h2 style="color:orange;" >国家AAAA级旅游景区</h2>
-                <p id="p1">青岛栈桥是青岛滨海风景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。青岛栈桥位于游人如织的青岛中山路南端，桥身从海岸探入如弯月般的青岛湾深处。桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。</p>
+                <p id="im">照片</p>
+                <div id="dp0">
+                    <h1>青岛栈桥</h1>
+                    <h2 style="color:orange;" >国家AAAA级旅游景区</h2>
+                    <p id="p1">青岛栈桥是青岛滨海风景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。青岛栈桥位于游人如织的青岛中山路南端，桥身从海岸探入如弯月般的青岛湾深处。桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。</p>                       
+                </div>
                 
             </div>
-            <p id="p2">10分钟前&&123评论</p>
+            <p id="p2">10分钟前<span style="padding-left: 15px">123评论</span></p>
         </div>
     </div>
 </body>
@@ -93,16 +138,5 @@
     var m1= new Date().getMonth()+1;
     m.innerHTML=m1+'月';
     m.setAttribute("style","margin-top:0");
-
-    var div1=document.getElementById('div1');
-    var div2=document.getElementById('div2');
-    div1.onmouseover=function(){
-        div1.style.height='220'+'px';
-        div2.style.height='290'+'px';
-    }
-    div1.onmouseout=function(){
-        div1.style.height='328'+'px';
-        div2.style.height='140'+'px';
-    }
 </script>
 </html>
